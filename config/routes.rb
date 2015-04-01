@@ -1,4 +1,17 @@
 Rails.application.routes.draw do
+
+  namespace :api, defaults: {format: :json} do
+
+    #resources :users
+    resource :profile, except: [:new, :destroy] do
+      resources :meals, except: [:new]
+    end
+
+    post 'auth' => 'auth#authenticate'
+  end
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

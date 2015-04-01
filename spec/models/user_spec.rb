@@ -6,6 +6,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to respond_to(:name) }
   it { is_expected.to respond_to(:expected_calories) }
   it { is_expected.to respond_to(:meals) }
+  it { is_expected.to respond_to(:generate_auth_token) }
 
   context 'is invalid' do
     it 'without a login' do
@@ -46,5 +47,10 @@ RSpec.describe User, type: :model do
   it 'does not allow duplicated login names' do
     user = create(:user)
     expect {create(:user, login: user.login)}.to raise_error(ActiveRecord::RecordInvalid)
+  end
+
+  it 'generates auth token' do
+    expect(subject.generate_auth_token).to be_kind_of String
+    expect(subject.generate_auth_token.size).to be > 10
   end
 end
