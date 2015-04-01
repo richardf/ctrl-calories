@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401000851) do
+ActiveRecord::Schema.define(version: 20150401190933) do
 
   create_table "meals", force: :cascade do |t|
     t.integer  "user_id"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150401000851) do
     t.integer  "expected_calories"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "password_digest"
   end
 
   add_index "users", ["login"], name: "index_users_on_login"

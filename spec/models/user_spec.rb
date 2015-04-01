@@ -39,6 +39,32 @@ RSpec.describe User, type: :model do
     end
   end
 
+  context 'when creating' do
+    it 'fails if no password' do
+      subject.password = nil
+      expect(subject.save).to be false
+    end
+
+    it 'fails if password length < 6' do
+      subject.password = 'abcd'
+      expect(subject.save).to be false
+    end
+
+    it 'succeeds if password is ok' do
+      expect(subject.save).to be true
+    end
+
+    it 'fails because password confirmation doesnt match' do
+      subject.password_confirmation = 'totally different pass'
+      expect(subject.save).to be false
+    end
+
+    it 'succeeds because password confirmation match' do
+      subject.password_confirmation = subject.password
+      expect(subject.save).to be true
+    end
+  end
+
   it 'is valid without expected calories' do
     subject.expected_calories = nil
     expect(subject.valid?).to be true
