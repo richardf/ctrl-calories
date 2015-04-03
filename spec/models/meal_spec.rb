@@ -66,5 +66,5 @@ RSpec.describe Meal, type: :model do
       expect(json).not_to include('created_at')
       expect(json).not_to include('updated_at')
     end
-  end  
+  end
 end

@@ -7,6 +7,9 @@ class User < ActiveRecord::Base
   validates :password, :length => { :minimum => 6 }, on: :create
   validates_confirmation_of :password
 
+  scope :calories_today, -> { includes(:meals).where("meals.ate_at >= ? and meals.ate_at <= ?", 
+    Time.current.beginning_of_day(), Time.current.end_of_day()).references(:meals).sum(:calories)}
+
   def generate_auth_token
     payload = { user_id: self.id }
     AuthTokenEncoder.encode(payload)

@@ -15,7 +15,10 @@ class API::ProfilesController < ApplicationController
   end
 
   def show
-    respond_with(@current_user)
+    calories = User.where(id: @current_user.id).calories_today
+    response = @current_user.as_json
+    response['consumed_calories'] = calories
+    respond_with(response)
   end
 
   def update

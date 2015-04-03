@@ -94,6 +94,15 @@ RSpec.describe User, type: :model do
     end
   end
 
+  it 'calories_today should give the number of calories consumed in present day' do
+    user = create(:user, :with_meals, meal_count: 3)
+    sum = 0
+    user.meals.each {|m| sum += m.calories}
+    Meal.create(user: user, description: 'lunch', calories: 400, ate_at: 1.day.ago)
+    expect(User.where(id: user.id).calories_today).to eq(sum)
+  end
+
+
   context 'user as json' do
     let(:json) {build(:user).as_json}
     it 'should include name, login, expected_calories and meals' do

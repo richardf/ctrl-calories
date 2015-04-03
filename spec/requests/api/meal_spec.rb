@@ -27,18 +27,18 @@ describe "Meal API",  type: :request do
     end
 
     it 'should create a valid meal for user' do
-      post '/api/profile/meals', {meal: {description: 'hamburguer', calories: 500, ate_at: DateTime.now}}, auth_header(user.login, user.password)
+      post '/api/profile/meals', {meal: {description: 'hamburguer', calories: 500, ate_at: Time.current}}, auth_header(user.login, user.password)
       expect(response).to have_http_status :created
     end
 
     it 'should fail if no description is given' do
-      post '/api/profile/meals', {meal: {description: '', calories: 500, ate_at: DateTime.now}}, auth_header(user.login, user.password)
+      post '/api/profile/meals', {meal: {description: '', calories: 500, ate_at: Time.current}}, auth_header(user.login, user.password)
       expect(response).to have_http_status :unprocessable_entity
       expect(json_body[:error]).to include('Description can\'t be blank')
     end
 
     it 'should fail if no calories is given' do
-      post '/api/profile/meals', {meal: {description: 'hamburguer', ate_at: DateTime.now}}, auth_header(user.login, user.password)
+      post '/api/profile/meals', {meal: {description: 'hamburguer', ate_at: Time.current}}, auth_header(user.login, user.password)
       expect(response).to have_http_status :unprocessable_entity
       expect(json_body[:error]).to include('Calories is not a number')
     end

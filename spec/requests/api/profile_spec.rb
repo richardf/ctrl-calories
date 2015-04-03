@@ -102,7 +102,6 @@ describe "Profile API",  type: :request do
       expect(response).to have_http_status :unauthorized
     end
 
-
     context 'if authenticated' do
       let(:user) { create(:user) }
 
@@ -116,6 +115,16 @@ describe "Profile API",  type: :request do
         expect(json_body[:login]).to eq(user.login)
         expect(json_body[:name]).to eq(user.name)
         expect(json_body[:expected_calories]).to eq(user.expected_calories)
+      end
+
+      it 'should inform the number of consumed calories of present day' do
+        other_user = create(:user, :with_meals, meal_count: 3)
+        sum = 0
+        other_user.meals.each {|m| sum += m.calories}
+        Meal.create(user: other_user, description: 'lunch', calories: 400, ate_at: 1.day.ago)
+        get '/api/profile', {}, auth_header(other_user.login, other_user.password)
+
+        expect(json_body[:consumed_calories]).to eq(sum)
       end
     end
   end  
