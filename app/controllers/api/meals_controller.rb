@@ -16,10 +16,13 @@ class API::MealsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def show
+    meal = Meal.find_by(id: params[:id], user: @current_user)
+    if meal
+      respond_with(meal)
+    else
+      render json: { error: 'Meal not found' }, status: :not_found
+    end
   end
 
   def update
