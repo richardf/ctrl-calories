@@ -5,6 +5,15 @@ class API::MealsController < ApplicationController
   end
 
   def create
+    meal_params = params.require(:meal).permit(:description, :calories, :ate_at)
+    meal = Meal.new(meal_params)
+    meal.user = @current_user
+
+    if meal.save
+      respond_with(@meal, location: api_profile_meal_url(meal.id))
+    else
+      render json: { error: meal.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def edit

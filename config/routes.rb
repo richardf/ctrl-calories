@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
     #resources :users
     resource :profile, except: [:new, :destroy, :edit] do
-      resources :meals, except: [:new]
+      resources :meals, except: [:new, :edit]
     end
 
     post 'auth' => 'auth#authenticate'
