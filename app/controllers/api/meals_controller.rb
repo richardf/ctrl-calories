@@ -1,7 +1,7 @@
 class API::MealsController < ApplicationController
 
   def index
-    respond_with(User.first.meals)
+    respond_with(@current_user.meals)
   end
 
   def create

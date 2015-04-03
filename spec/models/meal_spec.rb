@@ -51,4 +51,20 @@ RSpec.describe Meal, type: :model do
   it 'is valid when filled properly' do
     expect(subject.valid?).to be true
   end
+
+  context 'meal as json' do
+    let(:json) {build(:meal).as_json}
+    it 'should include id, description, calories and ate_at' do
+      expect(json).to include('id')
+      expect(json).to include('description')
+      expect(json).to include('calories')
+      expect(json).to include('ate_at')
+    end
+
+    it 'should not include user_id, created_at and updated_at' do
+      expect(json).not_to include('user_id')
+      expect(json).not_to include('created_at')
+      expect(json).not_to include('updated_at')
+    end
+  end  
 end
