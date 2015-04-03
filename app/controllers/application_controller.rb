@@ -10,10 +10,16 @@ class ApplicationController < ActionController::Base
   rescue_from Exceptions::NotAuthenticatedError do
     render json: { error: 'Not Authorized' }, status: :unauthorized
   end
+  
   rescue_from Exceptions::AuthenticationTimeoutError do
     render json: { error: 'Auth token is expired' }, status: :unauthorized
   end
 
+  rescue_from ActionController::ParameterMissing do |exception|
+    error = {}
+    error[exception.param] = ['parameter is required']
+    render json: { error: [error] }, status: :unprocessable_entity
+  end
 
   private
 

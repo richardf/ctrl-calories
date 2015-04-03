@@ -79,4 +79,35 @@ RSpec.describe User, type: :model do
     expect(subject.generate_auth_token).to be_kind_of String
     expect(subject.generate_auth_token.size).to be > 10
   end
+
+  context 'validate password' do
+    it 'is true with valid password' do
+      expect(User.password_valid?('good_password', 'good_password')).to be true
+    end
+
+    it 'is false with short password' do
+      expect(User.password_valid?('short', 'short')).to be false
+    end
+
+    it 'is false with password and confirmation different' do
+      expect(User.password_valid?('password123', '123password')).to be false
+    end
+  end
+
+  context 'user as json' do
+    let(:json) {build(:user).as_json}
+    it 'should include name, login, expected_calories and meals' do
+      expect(json).to include("login")
+      expect(json).to include("name")
+      expect(json).to include("expected_calories")
+      expect(json).to include("meals")
+    end
+
+    it 'should not include id, created_at, updated_at and password_digest' do
+      expect(json).not_to include("id")
+      expect(json).not_to include("created_at")
+      expect(json).not_to include("updated_at")
+      expect(json).not_to include("password_digest")
+    end
+  end
 end

@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
 
     #resources :users
-    resource :profile, except: [:new, :destroy] do
-      resources :meals, except: [:new]
+    resource :profile, except: [:new, :destroy, :edit] do
+#      resources :meals, except: [:new]
     end
 
     post 'auth' => 'auth#authenticate'

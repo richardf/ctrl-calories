@@ -11,11 +11,11 @@ describe "Authentication API",  type: :request do
     end
 
     it 'should return auth token' do
-      expect(json[:auth_token].size).to be > 0
+      expect(json_body[:auth_token].size).to be > 0
     end
 
     it 'should not return error' do
-      expect(json[:error]).to be nil
+      expect(json_body[:error]).to be nil
     end
   end
 
@@ -23,7 +23,7 @@ describe "Authentication API",  type: :request do
     it 'should return status not authorized if login is invalid' do
       post '/api/auth', {login: 'invalid_login', password: 'foobar'}
       expect(response).to have_http_status :unauthorized
-      expect(json[:error]).to eq('Invalid username or password')
+      expect(json_body[:error]).to eq('Invalid username or password')
     end
 
     it 'should return status not authorized if password is invalid' do
@@ -33,12 +33,12 @@ describe "Authentication API",  type: :request do
 
     it 'should return error message' do
       post '/api/auth', {login: 'invalid_login', password: 'foobar'}
-      expect(json[:error]).to eq('Invalid username or password')
+      expect(json_body[:error]).to eq('Invalid username or password')
     end
 
     it 'should not have auth token' do
       post '/api/auth', {login: 'invalid_login', password: 'foobar'}
-      expect(json[:auth_token]).to be nil
+      expect(json_body[:auth_token]).to be nil
     end
   end
 end
