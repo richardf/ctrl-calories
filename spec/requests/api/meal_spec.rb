@@ -81,4 +81,35 @@ describe "Meal API",  type: :request do
       expect(json_body[:error]).to eq('Meal not found')
     end
   end
+
+
+  context 'updating a meal' do
+    let(:user) { create(:user, :with_meals, meal_count: 2) }
+    let(:another_user) { create(:user, :with_meals, meal_count: 2) }
+
+    it 'without authentication should give status not authorized' do
+      put '/api/profile/meals/1', {meal:{id: user.meals.first.id, description: 'eat eat eat'}}
+      expect(response).to have_http_status :unauthorized
+    end
+
+    it 'should not update meal owner' do
+      put '/api/profile/meals/' + user.meals.first.id.to_s, {meal:{id: user.meals.first.id, user_id: another_user.id}}, auth_header(user.login, user.password)
+      expect(response).to have_http_status :no_content
+      expect(Meal.find(user.meals.first.id).user.id).to eq(user.id)
+    end
+
+    it 'should not update meal of other user' do
+      put '/api/profile/meals/' + another_user.meals.first.id.to_s, {meal:{id: another_user.meals.first.id, description: 'eat eat eat'}}, auth_header(user.login, user.password)
+      expect(response).to have_http_status :not_found
+      expect(Meal.find(another_user.meals.first.id).description).to eq(another_user.meals.first.description)
+    end
+
+    it 'should update meal' do
+      put '/api/profile/meals/' + user.meals.first.id.to_s, {meal:{id: user.meals.first.id, description: 'eat eat', calories: 99999}}, auth_header(user.login, user.password)
+      expect(response).to have_http_status :no_content
+      meal = Meal.find(user.meals.first.id)
+      expect(meal.description).to eq('eat eat')
+      expect(meal.calories).to eq(99999)
+    end
+  end
 end
