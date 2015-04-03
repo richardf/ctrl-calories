@@ -27,26 +27,32 @@ describe "Meal API",  type: :request do
     end
 
     it 'should create a valid meal for user' do
-      post '/api/profile/meals', {meal: {description: 'hamburguer', calories: 500, ate_at: Time.current}}, auth_header(user.login, user.password)
+      post '/api/profile/meals', {meal: {description: 'hamburguer', calories: 500, ate_at_time: Time.current, ate_at_date: Date.current}}, auth_header(user.login, user.password)
       expect(response).to have_http_status :created
     end
 
     it 'should fail if no description is given' do
-      post '/api/profile/meals', {meal: {description: '', calories: 500, ate_at: Time.current}}, auth_header(user.login, user.password)
+      post '/api/profile/meals', {meal: {description: '', calories: 500, ate_at_time: Time.current, ate_at_date: Date.current}}, auth_header(user.login, user.password)
       expect(response).to have_http_status :unprocessable_entity
       expect(json_body[:error]).to include('Description can\'t be blank')
     end
 
     it 'should fail if no calories is given' do
-      post '/api/profile/meals', {meal: {description: 'hamburguer', ate_at: Time.current}}, auth_header(user.login, user.password)
+      post '/api/profile/meals', {meal: {description: 'hamburguer', ate_at_time: Time.current, ate_at_date: Date.current}}, auth_header(user.login, user.password)
       expect(response).to have_http_status :unprocessable_entity
       expect(json_body[:error]).to include('Calories is not a number')
     end
 
-    it 'should fail if no ate_at is given' do
-      post '/api/profile/meals', {meal: {description: 'hamburguer', calories: 100}}, auth_header(user.login, user.password)
+    it 'should fail if no ate_at_date is given' do
+      post '/api/profile/meals', {meal: {description: 'hamburguer', calories: 100, ate_at_time: Time.current}}, auth_header(user.login, user.password)
       expect(response).to have_http_status :unprocessable_entity
-      expect(json_body[:error]).to include('Ate at can\'t be blank')
+      expect(json_body[:error]).to include('Ate at date can\'t be blank')
+    end
+
+    it 'should fail if no ate_at_time is given' do
+      post '/api/profile/meals', {meal: {description: 'hamburguer', calories: 100, ate_at_date: Date.current}}, auth_header(user.login, user.password)
+      expect(response).to have_http_status :unprocessable_entity
+      expect(json_body[:error]).to include('Ate at time can\'t be blank')
     end
   end
 
@@ -66,7 +72,8 @@ describe "Meal API",  type: :request do
       expect(json_body[:id]).to eq(user.meals.first.id)
       expect(json_body[:description]).to eq(user.meals.first.description)
       expect(json_body[:calories]).to eq(user.meals.first.calories)
-      expect(json_body).to include(:ate_at)
+      expect(json_body).to include(:ate_at_time)
+      expect(json_body).to include(:ate_at_date)
     end
 
     it 'should give error if meal doesnt belong to user' do

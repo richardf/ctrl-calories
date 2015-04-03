@@ -11,14 +11,14 @@ users = User.create([
 ])
 
 Meal.create([
-  {user_id: users.first.id, description: 'lots of sashimi', calories: 400, ate_at: Time.current},
-  {user_id: users.first.id, description: 'nutella', calories: 600, ate_at: 1.hour.ago},
-  {user_id: users.first.id, description: 'french fries', calories: 300, ate_at: 1.day.ago},
-  {user_id: users.first.id, description: 'salad', calories: 100, ate_at: 2.days.ago}
+  {user_id: users.first.id, description: 'lots of sashimi', calories: 400, ate_at_time: Time.current, ate_at_date: Date.current},
+  {user_id: users.first.id, description: 'nutella', calories: 600, ate_at_time: 1.hour.ago, ate_at_date: Date.current},
+  {user_id: users.first.id, description: 'french fries', calories: 300, ate_at_time: 1.day.ago, ate_at_date: 1.day.ago},
+  {user_id: users.first.id, description: 'salad', calories: 100, ate_at_time: 2.days.ago, ate_at_date: 2.days.ago}
 ])
 
 Meal.create([
-  {user_id: users.last.id, description: 'The Force', calories: 5000, ate_at: Time.current},
+  {user_id: users.last.id, description: 'The Force', calories: 5000, ate_at_time: Time.current, ate_at_date: Date.current},
 ])
 
 puts 'Ok!'

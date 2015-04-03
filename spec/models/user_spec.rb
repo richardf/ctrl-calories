@@ -98,7 +98,7 @@ RSpec.describe User, type: :model do
     user = create(:user, :with_meals, meal_count: 3)
     sum = 0
     user.meals.each {|m| sum += m.calories}
-    Meal.create(user: user, description: 'lunch', calories: 400, ate_at: 1.day.ago)
+    Meal.create(user: user, description: 'lunch', calories: 400, ate_at_date: 1.day.ago, ate_at_time: 1.day.ago)
     expect(User.where(id: user.id).calories_today).to eq(sum)
   end
 

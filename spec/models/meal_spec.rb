@@ -6,7 +6,8 @@ RSpec.describe Meal, type: :model do
   it { is_expected.to respond_to(:user) }
   it { is_expected.to respond_to(:description) }
   it { is_expected.to respond_to(:calories) }
-  it { is_expected.to respond_to(:ate_at) }
+  it { is_expected.to respond_to(:ate_at_date) }
+  it { is_expected.to respond_to(:ate_at_time) }
 
   context 'is invalid' do
     it 'without a description' do
@@ -25,7 +26,12 @@ RSpec.describe Meal, type: :model do
     end
 
     it 'without eaten time' do
-      subject.ate_at = nil
+      subject.ate_at_time = nil
+      expect(subject.valid?).to be false
+    end
+
+    it 'without eaten date' do
+      subject.ate_at_date = nil
       expect(subject.valid?).to be false
     end
 
@@ -58,7 +64,8 @@ RSpec.describe Meal, type: :model do
       expect(json).to include('id')
       expect(json).to include('description')
       expect(json).to include('calories')
-      expect(json).to include('ate_at')
+      expect(json).to include('ate_at_date')
+      expect(json).to include('ate_at_time')
     end
 
     it 'should not include user_id, created_at and updated_at' do

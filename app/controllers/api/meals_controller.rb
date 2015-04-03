@@ -48,7 +48,7 @@ class API::MealsController < ApplicationController
   private
 
   def required_params
-    @meal_params = params.require(:meal).permit(:description, :calories, :ate_at)
+    @meal_params = params.require(:meal).permit(:description, :calories, :ate_at_time, :ate_at_date)
   end
 
   def get_user_meal

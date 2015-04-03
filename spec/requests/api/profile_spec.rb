@@ -121,7 +121,7 @@ describe "Profile API",  type: :request do
         other_user = create(:user, :with_meals, meal_count: 3)
         sum = 0
         other_user.meals.each {|m| sum += m.calories}
-        Meal.create(user: other_user, description: 'lunch', calories: 400, ate_at: 1.day.ago)
+        Meal.create(user: other_user, description: 'lunch', calories: 400, ate_at_time: 1.day.ago, ate_at_date: 1.day.ago)
         get '/api/profile', {}, auth_header(other_user.login, other_user.password)
 
         expect(json_body[:consumed_calories]).to eq(sum)
