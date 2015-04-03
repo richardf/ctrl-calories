@@ -1,7 +1,7 @@
 class API::MealsController < ApplicationController
 
   before_action :required_params, only: [:create, :update]
-  before_action :get_user_meal, only: [:show, :update]
+  before_action :get_user_meal, only: [:show, :update, :destroy]
 
   def index
     respond_with(@current_user.meals)
@@ -31,11 +31,17 @@ class API::MealsController < ApplicationController
       @meal = Meal.update(@meal.id, @meal_params)
       respond_with(@meal)
     else
-      render json: { error: 'Meal not found' }, status: :not_found      
+      render json: { error: 'Meal not found' }, status: :not_found
     end
   end
 
   def destroy
+    if @meal
+      @meal.destroy
+      respond_with(@meal)
+    else
+      render json: { error: 'Meal not found' }, status: :not_found
+    end
   end
 
 

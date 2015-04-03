@@ -88,7 +88,7 @@ describe "Meal API",  type: :request do
     let(:another_user) { create(:user, :with_meals, meal_count: 2) }
 
     it 'without authentication should give status not authorized' do
-      put '/api/profile/meals/1', {meal:{id: user.meals.first.id, description: 'eat eat eat'}}
+      put '/api/profile/meals/1'
       expect(response).to have_http_status :unauthorized
     end
 
@@ -110,6 +110,31 @@ describe "Meal API",  type: :request do
       meal = Meal.find(user.meals.first.id)
       expect(meal.description).to eq('eat eat')
       expect(meal.calories).to eq(99999)
+    end
+  end
+
+
+  context 'deleting meal' do
+    let(:user) { create(:user, :with_meals, meal_count: 2) }
+    let(:another_user) { create(:user, :with_meals, meal_count: 2) }
+
+    it 'without authentication should give status not authorized' do
+      delete '/api/profile/meals/1'
+      expect(response).to have_http_status :unauthorized
+    end
+
+    it 'should delete meal' do
+      meal_id = user.meals.first.id
+      delete '/api/profile/meals/' + meal_id.to_s, {}, auth_header(user.login, user.password)
+      expect(response).to have_http_status :no_content
+      expect(Meal.find_by(id: meal_id)).to be nil
+    end
+
+    it 'should not delete meal of other user' do
+      meal_id = another_user.meals.first.id
+      delete '/api/profile/meals/' + meal_id.to_s, {}, auth_header(user.login, user.password)
+      expect(response).to have_http_status :not_found
+      expect(Meal.find(meal_id)).to be_kind_of(Meal)
     end
   end
 end
