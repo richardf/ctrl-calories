@@ -102,6 +102,15 @@ describe "Profile API",  type: :request do
       expect(response).to have_http_status :unauthorized
     end
 
+    it 'with expired token should give status not authorized' do
+      user = create(:user)
+      payload = { user_id: user.id }
+      token = AuthTokenEncoder.encode(payload, 1.minute.ago)
+      get '/api/profile', {}, {'Authorization' => "Bearer #{token}"}
+      expect(response).to have_http_status :unauthorized
+      expect(json_body[:error]).to include('Auth token is expired')
+    end
+
     context 'if authenticated' do
       let(:user) { create(:user) }
 

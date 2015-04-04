@@ -30,19 +30,13 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_request
-    if auth_token_expired?
-      fail Exceptions::AuthenticationTimeoutError
-    elsif !@current_user
+    if !@current_user
       fail Exceptions::NotAuthenticatedError
     end
   end
 
   def decoded_auth_token
     @decoded_auth_token ||= AuthTokenEncoder.decode(http_auth_header_content)
-  end
-
-  def auth_token_expired?
-    decoded_auth_token && decoded_auth_token.expired?
   end
 
   # JWTs are stored in the Authorization header using this format:
