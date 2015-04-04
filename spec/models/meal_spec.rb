@@ -74,4 +74,26 @@ RSpec.describe Meal, type: :model do
       expect(json).not_to include('updated_at')
     end
   end
+
+  context 'filtering' do
+   let(:user) {create(:user)}
+   let!(:meal_one) {Meal.create(user: user, description: 'gorgeous fish', calories: 300, ate_at_date: '2015-04-03', ate_at_time: '13:30')}
+   let!(:meal_two) {Meal.create(user: user, description: 'not so good fish', calories: 200, ate_at_date: '2015-04-04', ate_at_time: '13:25')}
+
+    it 'start_date should give meals eaten after or at given day' do
+      expect(Meal.where(user: user).start_date('2015-04-04').size).to be 1
+    end
+
+    it 'end_date should give meals eaten before or at given day' do
+      expect(Meal.where(user: user).end_date('2015-04-03').size).to be 1
+    end
+
+    it 'start_time should give meals eaten after or at given day' do
+      expect(Meal.where(user: user).start_time('13:30').size).to be 1
+    end
+
+    it 'end_time should give meals eaten before or at given day' do
+      expect(Meal.where(user: user).end_time('13:25').size).to be 1
+    end
+  end
 end

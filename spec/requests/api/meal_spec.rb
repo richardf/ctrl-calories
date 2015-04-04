@@ -15,6 +15,39 @@ describe "Meal API",  type: :request do
       get '/api/profile/meals', {}, auth_header(user.login, user.password)
       expect(json_body.size).to eq 3
     end
+
+    context 'with filter' do
+      let(:f_user) {create(:user)}
+      let!(:meal_one) {Meal.create(user: f_user, ate_at_time: '09:30', ate_at_date: '2015-04-03', description: 'fish', calories: 300)}
+      let!(:meal_two) {Meal.create(user: f_user, ate_at_time: '09:45', ate_at_date: '2015-04-04', description: 'gelado', calories: 250)}
+      before(:each) {Meal.create(user: another_user, ate_at_time: '09:35', ate_at_date: '2015-04-04', description: 'beef', calories: 350)}
+     
+      it 'should return meals eaten at or after given day, for logged user' do
+        get '/api/profile/meals?start_date=2015-04-04', {}, auth_header(f_user.login, f_user.password)
+        expect(json_body.size).to eq 1
+      end
+
+      it 'should return meals eaten at or before given day, for logged user' do
+        get '/api/profile/meals?end_date=2015-04-03', {}, auth_header(f_user.login, f_user.password)
+        expect(json_body.size).to eq 1
+      end
+
+      it 'should return meals eaten at or after given time, for logged user' do
+        get '/api/profile/meals?start_time=09:35', {}, auth_header(f_user.login, f_user.password)
+        expect(json_body.size).to eq 1
+      end
+
+      it 'should return meals eaten at or before given time, for logged user' do
+        get '/api/profile/meals?end_time=09:35', {}, auth_header(f_user.login, f_user.password)
+        expect(json_body.size).to eq 1
+      end
+
+      it 'should support multiple filters' do
+        Meal.create(user: f_user, ate_at_time: '08:55', ate_at_date: '2015-04-03', description: 'broccoli', calories: 300)
+        get '/api/profile/meals?start_time=09:00&end_time=09:45', {}, auth_header(f_user.login, f_user.password)
+        expect(json_body.size).to eq 2
+      end
+    end
   end
 
 

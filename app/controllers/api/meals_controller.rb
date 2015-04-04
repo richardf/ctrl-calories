@@ -4,7 +4,8 @@ class API::MealsController < ApplicationController
   before_action :get_user_meal, only: [:show, :update, :destroy]
 
   def index
-    respond_with(@current_user.meals)
+    meals = Meal.where(user: @current_user).filter(params.slice(:start_date, :end_date, :start_time, :end_time))
+    respond_with(meals)
   end
 
   def create
