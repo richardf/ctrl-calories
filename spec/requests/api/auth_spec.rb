@@ -19,6 +19,11 @@ describe "Authentication API",  type: :request do
     end
   end
 
+  it 'authentication should be case insensitive for login' do
+    post '/api/auth', {login: subject.login.upcase, password: 'foobar'}
+    expect(response).to have_http_status :ok
+  end
+
   context 'with invalid credentials' do
     it 'should return status not authorized if login is invalid' do
       post '/api/auth', {login: 'invalid_login', password: 'foobar'}

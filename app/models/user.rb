@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
 
   scope :calories_today, -> { includes(:meals).where("meals.ate_at_date = ?", Date.current).references(:meals).sum(:calories)}
 
+  before_create :downcase_login
+
   def generate_auth_token
     payload = { user_id: self.id }
     AuthTokenEncoder.encode(payload)
@@ -22,5 +24,11 @@ class User < ActiveRecord::Base
   def self.password_valid?(password, confirmation)
     return false if password.blank? || password.size < 6 || password != confirmation
     true
+  end
+
+  private
+
+  def downcase_login
+    self.login.downcase!
   end
 end

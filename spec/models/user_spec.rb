@@ -63,6 +63,12 @@ RSpec.describe User, type: :model do
       subject.password_confirmation = subject.password
       expect(subject.save).to be true
     end
+
+    it 'should save login as lowercase' do
+      subject.login = 'UPCASE_LOGIN'
+      subject.save
+      expect(User.last.login).to eq('upcase_login')
+    end
   end
 
   it 'is valid without expected calories' do

@@ -3,7 +3,7 @@ class API::AuthController < ApplicationController
   skip_before_action :authenticate_request
 
   def authenticate
-    login_param = params.require(:login)
+    login_param = params.require(:login).downcase
     passwd_param = params.require(:password)
     user = User.find_by(login: login_param)
 
