@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     post 'auth' => 'auth#authenticate'
   end
 
-
+  root to: 'main#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

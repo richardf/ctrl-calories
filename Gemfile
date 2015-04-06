@@ -30,6 +30,9 @@ gem 'jwt'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'angularjs-rails'
+gem 'angular-ui-bootstrap-rails' #for bootstrap UI
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
