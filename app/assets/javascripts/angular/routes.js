@@ -5,4 +5,13 @@ angular.module('CtrlCalories')
 		templateUrl: 'templates/home.html',
 		controller: 'HomeCtrl'
 	})	
+	.when('/signin', {
+		templateUrl: 'templates/signin.html',
+		controller: 'AuthCtrl'
+	})
+	.when('/signup', {
+		templateUrl: 'templates/signup.html',
+		controller: 'AuthCtrl'
+	})
+	.otherwise({ retirectTo: '/'})	
  });

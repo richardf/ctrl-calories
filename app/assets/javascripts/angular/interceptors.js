@@ -21,7 +21,7 @@ angular.module('CtrlCalories')
 	}).run(function($rootScope, $location) {
         $rootScope.$on( "$routeChangeStart", function(event, next) {
             if (localStorage.getItem("token") == null) {
-                if ( next.templateUrl === "partials/restricted.html") {
+                if (next.templateUrl != "templates/signin.html" && next.templateUrl != "templates/signup.html") {
                     $location.path("/signin");
                 }
             }

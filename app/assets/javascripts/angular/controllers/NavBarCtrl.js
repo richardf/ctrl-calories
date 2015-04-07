@@ -1,5 +1,5 @@
 angular.module('CtrlCalories')
-    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', 'Auth',
+    .controller('NavBarCtrl', ['$rootScope', '$scope', '$location', 'Auth',
         function ($rootScope, $scope, $location, Auth) {
             function successAuth(res) {
                 localStorage.setItem("token", res.auth_token);
