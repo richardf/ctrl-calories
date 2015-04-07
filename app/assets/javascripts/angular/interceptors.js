@@ -11,7 +11,7 @@ angular.module('CtrlCalories')
 	            },
 	            'responseError': function (response) {
 	                if (response.status === 401 || response.status === 403) {
-	                    localStorage.removeItem("token");
+	                    // localStorage.removeItem("token");
 	                    // $location.path('/signin');
 	                }
 	                return $q.reject(response);

@@ -1,9 +1,15 @@
 angular.module('CtrlCalories')
     .controller('AuthCtrl', ['$rootScope', '$scope', '$location', 'Auth',
         function ($rootScope, $scope, $location, Auth) {
+
+            function successSignup() {
+                debugger;
+                $scope.signin($scope.login, $scope.password);
+            }
+
             function successAuth(res) {
                 localStorage.setItem("token", res.auth_token);
-                window.location = "/";
+                $location.path('/');
             }
 
             $scope.signin = function (login, password) {
@@ -17,24 +23,17 @@ angular.module('CtrlCalories')
                 })
             };
 
-            $scope.signup = function (login, name, password, exp_calories) {
-                var formData = {
-                    login: login,
-                    password: password,
-                    name: name,
-                    expected_calories: exp_calories
+            $scope.signup = function () {
+                var formData = { user:{
+                    login: $scope.login,
+                    password: $scope.password,
+                    name: $scope.name,
+                    expected_calories: $scope.exp_calories
+                    }
                 };
 
-                Auth.signup(formData, successAuth, function (res) {
+                Auth.signup(formData, successSignup, function (res) {
                     $rootScope.error = res.error || 'Failed to sign up.';
                 })
             };
-
-            // $scope.logout = function () {
-            //     Auth.logout(function () {
-            //         window.location = "/"
-            //     });
-            // };
-            $scope.token = localStorage.getItem("token");
-            $scope.tokenClaims = Auth.getTokenClaims();
         }]);
