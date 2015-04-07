@@ -30,7 +30,7 @@
                   </div>
                   <div id="loginErrorMsg" class="alert alert-error" ng-show="error">Something went wrong</div>
                   
-                  <button type="submit" class="btn btn-success btn-block" ng-click="signup()">Register</button>
+                  <button type="submit" class="btn btn-success btn-block" ng-click="signup()" ng-disabled="!loginForm.$valid">Register</button>
               </form>
           </div>
       </div>
