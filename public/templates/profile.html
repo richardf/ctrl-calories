@@ -1,1 +1,52 @@
- <h1>Profile</h1>
+<h1>Profile</h1>
+
+<div class="row">
+	<div class="col-xs-3"></div>
+
+	<div class="col-xs-6">
+		<form id="ProfileForm" name="profileForm" novalidate>
+			<div class='form-row'>
+				<div class="col-xs-12 form-group">
+					<label for="name" class="control-label">Name</label>
+					<input type="text" class="form-control" id="name" name="name" title="Please enter your name" placeholder="Donald Knuth" ng-model="name">
+					<span class="help-block"></span>
+				</div>
+			</div>
+			<div class='form-row'>
+				<div class="col-xs-12 form-group">
+					<label for="login" class="control-label">Email</label>
+					<input type="email" class="form-control" id="login" name="login" ng-model="login" disabled>
+					<span class="help-block"></span>
+				</div>
+			</div>
+			<div class='form-row'>
+				<div class="col-xs-6 form-group">
+					<label for="password" class="control-label">New Password</label>
+					<input type="password" class="form-control" id="password" name="password" title="Please enter your new password" ng-model="password" placeholder="At least 6 characters">
+					<span class="help-block"></span>
+				</div>
+				<div class="col-xs-6 form-group">
+					<label for="passwordConf" class="control-label">Password Confirmation</label>
+					<input type="password" class="form-control" id="passwordConf" name="passwordConf" title="Please confirm your password" ng-model="passwordConf">
+					<span class="help-block"></span>
+				</div>
+			</div>
+			<div class='form-row'>
+				<div class="col-xs-4 form-group">
+					<label for="expectedCalories" class="control-label">Calories per Day</label>
+					<input type="number" class="form-control" id="expectedCalories" name="expectedCalories" ng-model="expectedCalories" min="0" max="10000" title="Please inform your expected daily consume of calories">
+				</div>
+			</div>
+
+			<div class='form-row'>
+				<div class="col-xs-12 form-group">
+					<div id="errorMsg" class="alert alert-error" ng-show="error">Something went wrong</div>
+					<button type="submit" class="btn btn-success" ng-click="updateProfile()">Update Profile</button>
+					<button class="btn btn-default" onclick="window.history.go(-1);">Cancel</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<div class="col-xs-3"></div>
+</div>

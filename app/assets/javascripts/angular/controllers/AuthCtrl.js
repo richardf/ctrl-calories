@@ -18,7 +18,7 @@ angular.module('CtrlCalories')
                 };
 
                 Auth.signin(formData, successAuth, function () {
-                    $rootScope.error = 'Invalid credentials.';
+                    $rootScope.error = 'Wrong email or password';
                 })
             };
 
