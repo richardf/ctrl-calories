@@ -5,6 +5,10 @@ angular.module('CtrlCalories')
 		templateUrl: 'templates/home.html',
 		controller: 'HomeCtrl'
 	})	
+	.when('/profile', {
+		templateUrl: 'templates/profile.html',
+		controller: 'ProfileCtrl'
+	})	
 	.when('/signin', {
 		templateUrl: 'templates/signin.html',
 		controller: 'AuthCtrl'

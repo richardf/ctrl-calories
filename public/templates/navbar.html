@@ -6,8 +6,8 @@
 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav" ng-show="isLogged()">
-        <li class="active"><a href="#">My Profile</a></li>
-        <li><a href="#">Meals</a></li>
+        <li ng-class="{active : isNavActive('/')}"><a href="#/">My Meals</a></li>
+        <li ng-class="{active : isNavActive('/profile')}"><a href="#/profile">My Profile</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right" ng-show="isLogged()">
         <li><a href ng-click="logout()">Logout</a></li>

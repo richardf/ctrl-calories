@@ -7,6 +7,10 @@ angular.module('CtrlCalories')
                 });
             };
 
+            $scope.isNavActive = function(viewLocation) {
+                return viewLocation === $location.path();
+            }
+
             $rootScope.isLogged = function() {
                 return Auth.isLogged();
             }
