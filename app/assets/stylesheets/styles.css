@@ -9,3 +9,21 @@ body {
 #login-overlay {
 	width: 320px;
 }
+
+#loginErrorMsg {
+	text-align: center;
+}
+
+#hello {
+	font-family: "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
+	font-size: 39px;
+	font-weight: 300;
+	height: 50px;
+}
+/*input.form-control-req.ng-invalid.ng-touched {
+	border-color: #FA787E;
+}
+
+input.form-control-req.ng-valid.ng-touched {
+	border-color: #78FA89;
+}*/

@@ -3,7 +3,6 @@ angular.module('CtrlCalories')
         function ($rootScope, $scope, $location, Auth) {
 
             function successSignup() {
-                debugger;
                 $scope.signin($scope.login, $scope.password);
             }
 
@@ -12,10 +11,10 @@ angular.module('CtrlCalories')
                 $location.path('/');
             }
 
-            $scope.signin = function (login, password) {
+            $scope.signin = function () {
                 var formData = {
-                    login: login,
-                    password: password
+                    login: $scope.login,
+                    password: $scope.password
                 };
 
                 Auth.signin(formData, successAuth, function () {
