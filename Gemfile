@@ -31,7 +31,7 @@ gem 'jwt'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'angularjs-rails'
-gem 'angular-ui-bootstrap-rails' #for bootstrap UI
+# gem 'angular-ui-bootstrap-rails' #for bootstrap UI
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -54,8 +54,5 @@ group :development, :test do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
-  gem 'database_cleaner'
   gem 'simplecov'
 end
