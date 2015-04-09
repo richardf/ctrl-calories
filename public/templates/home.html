@@ -59,10 +59,10 @@
 						<td>13:15</td>
 						<td>
 							<span data-placement="top" data-toggle="tooltip" title="Edit">
-								<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+								<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#editMeal"><span class="glyphicon glyphicon-pencil"></span></button>
 							</span>
 							<span data-placement="top" data-toggle="tooltip" title="Delete">
-								<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
+								<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#deleteMeal" ><span class="glyphicon glyphicon-trash"></span></button>
 							</span>
 						</td>
 					</tr>
@@ -73,10 +73,10 @@
 						<td>13:15</td>
 						<td>
 							<span data-placement="top" data-toggle="tooltip" title="Edit">
-								<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+								<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#editMeal"><span class="glyphicon glyphicon-pencil"></span></button>
 							</span>
 							<span data-placement="top" data-toggle="tooltip" title="Delete">
-								<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
+								<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#deleteMeal" ><span class="glyphicon glyphicon-trash"></span></button>
 							</span>
 						</td>
 					</tr>
@@ -87,10 +87,10 @@
 						<td>13:15</td>
 						<td>
 							<span data-placement="top" data-toggle="tooltip" title="Edit">
-								<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button>
+								<button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#editMeal"><span class="glyphicon glyphicon-pencil"></span></button>
 							</span>
 							<span data-placement="top" data-toggle="tooltip" title="Delete">
-								<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" ><span class="glyphicon glyphicon-trash"></span></button>
+								<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#deleteMeal" ><span class="glyphicon glyphicon-trash"></span></button>
 							</span>
 						</td>
 					</tr>
@@ -115,7 +115,7 @@
 </div>
 
 
- <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+ <div class="modal fade" id="editMeal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
  	<div class="modal-dialog">
  		<div class="modal-content">
  			<div class="modal-header">
@@ -123,24 +123,35 @@
  				<h4 class="modal-title custom_align" id="Heading">Edit Your Meal</h4>
  			</div>
  			<div class="modal-body">
- 				<div class="form-group">
- 					<label for="description" class="control-label">Description</label>
- 					<input name="description" class="form-control " type="text">
+ 				<div class="form-row">
+	 				<div class="col-xs-12 form-group">
+	 					<label for="description" class="control-label">Description</label>
+	 					<input name="description" class="form-control " type="text">
+	 				</div>
  				</div>
- 				<div class="form-group">
-					<label for="calories" class="control-label">Calories</label>
- 					<input class="form-control" name="calories" type="number" min="1" max="10000">
+
+ 				<div class="form-row">
+	 				<div class="col-xs-3 form-group">
+						<label for="calories" class="control-label">Calories</label>
+	 					<input class="form-control" name="calories" type="number" min="1" max="10000">
+	 				</div> 		 				
+
+
+	 				<div class="col-xs-6 form-group">
+	 					<label class="control-label" for=""><i class="glyphicon glyphicon-calendar"></i> Date</label>
+						<input type="text" size="8" class="form-control" ng-model="filterStartDt" data-autoclose="1" bs-datepicker data-date-format="dd-MMM-yy">
+					</div>
+
+					<div class="col-xs-3 form-group">
+	 					<label class="control-label" for=""> Time</label>
+						<input type="text" size="5" class="form-control" ng-model="filterStartTime">
+					</div>
+
+					<div class="col-xs-12 form-group">
+		 				<button type="button" class="btn btn-success btn-lg btn-block" ><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+					</div>	
  				</div>
- 				<div class="form-group">
- 					<label class="control-label"><i class="glyphicon glyphicon-calendar"></i> Date and time</label>
-					<input type="text" size="8" class="form-control" ng-model="filterStartDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
-				</div>
-				<div class="form-group">
-					<input type="text" size="5" class="form-control" ng-model="filterStartTime" placeholder="Time">
-				</div>
- 			</div>
- 			<div class="modal-footer ">
- 				<button type="button" class="btn btn-success btn-lg btn-block" ><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+ 				<div class="clearfix"></div>
  			</div>
  		</div>
  		<!-- /.modal-content --> 
@@ -150,7 +161,7 @@
 
 
 
- <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+ <div class="modal fade" id="deleteMeal" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
  	<div class="modal-dialog">
  		<div class="modal-content">
  			<div class="modal-header">
