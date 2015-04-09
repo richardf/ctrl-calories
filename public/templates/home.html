@@ -7,36 +7,34 @@
 
 		<div class="row">
 			<div class="col-md-3 form-inline">
-				<div class="form-group">
+				<br>
+				<button type="button" class="btn btn-success btn" ><span class="glyphicon glyphicon-plus"></span> Add meal</button>
+			</div>
+
+			<div class="col-md-3 form-inline">
+				<div class="form-group pull-right">
 					<label class="control-label"><i class="glyphicon glyphicon-calendar"></i> Start datetime</label>
-					<div class="form-group">
-						<input type="text" size="8" class="form-control-xs" ng-model="filterStartDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
-						<input type="text" size="5" class="form-control-xs" ng-model="filterStartTime" placeholder="Time">
-					</div>
+						<input type="text" size="8" class="form-control" ng-model="filterStartDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
+						<input type="text" size="5" class="form-control" ng-model="filterStartTime" placeholder="Time">
 				</div>
 			</div>
 
 			<div class="col-md-3 form-inline">
-				<div class="form-group">
+				<div class="form-group pull-right">
 					<label class="control-label"><i class="glyphicon glyphicon-calendar"></i> Start datetime</label>
-					<div class="form-group">
-						<input type="text" size="8" class="form-control-xs" ng-model="filterEndDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
-						<input type="text" size="5" class="form-control-xs" ng-model="filterEndTime" data-autoclose="1" placeholder="Time" bs-timepicker data-time-format="HH:mm" data-time-type="string" data-minute-step="15" data-round-display="true" data-default-time="false">
-					</div>
+						<input type="text" size="8" class="form-control" ng-model="filterEndDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
+						<input type="text" size="5" class="form-control" ng-model="filterEndTime" data-autoclose="1" placeholder="Time" bs-timepicker data-time-format="HH:mm" data-time-type="string" data-minute-step="15" data-round-display="true" data-default-time="false">
 				</div>
 			</div>
 
-
-
-			<div class="col-md-2 form-inline">
+			<div class="col-md-3 form-inline">
 				<br>
-				<div class="form-group">
-					<button class="btn btn-default btn-xs"> Filter</button>
-					<button class="btn btn-default btn-xs" ng-click="clearFilter()"> Clear</button>
+				<div class="form-group pull-right">
+					<button class="btn btn-default"> Filter</button>
+					<button class="btn btn-default" ng-click="clearFilter()"> Clear</button>
 				</div>
 			</div>
 		</div>
-
 
 		<br>
 
@@ -148,7 +146,7 @@
 					</div>
 
 					<div class="col-xs-12 form-group">
-		 				<button type="button" class="btn btn-success btn-lg btn-block" ><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+		 				<button type="button" class="btn btn-success btn-lg btn-block"> Update</button>
 					</div>	
  				</div>
  				<div class="clearfix"></div>
@@ -170,12 +168,12 @@
  			</div>
  			<div class="modal-body">
 
- 				<div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this meal?</div>
+ 				<div class="alert"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this meal?</div>
 
  			</div>
  			<div class="modal-footer ">
- 				<button type="button" class="btn btn-success" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
- 				<button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+ 				<button type="button" class="btn btn-success"> Yes</button>
+ 				<button type="button" class="btn btn-default" data-dismiss="modal"> No</button>
  			</div>
  		</div>
  		<!-- /.modal-content --> 
