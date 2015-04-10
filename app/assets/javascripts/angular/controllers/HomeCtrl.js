@@ -51,6 +51,12 @@ angular.module('CtrlCalories')
                 });
             };
 
+            $scope.openPicker = function(pickerName, $event) {
+                $event.preventDefault();
+                $event.stopPropagation();
+                $scope.datepickers[pickerName] = !$scope.datepickers[pickerName];
+            };            
+
             function getMealById(id) {
                 return $scope.meals.filter(function( obj ) {
                     return +obj.id === +id;
@@ -75,5 +81,7 @@ angular.module('CtrlCalories')
 
 
     		loadProfile();    
-    		loadMeals();    	
+    		loadMeals();
+            $scope.datepickers = {'newmodal': false, 'editmodal' : false,
+             'filterstart' : false, 'filterend': false};
         }]);
