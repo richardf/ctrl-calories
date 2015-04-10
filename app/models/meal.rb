@@ -15,6 +15,9 @@ class Meal < ActiveRecord::Base
 	scope :end_time,	-> (time) {where("strftime('%H:%M', ate_at_time) <= ?", time)}
 
 	def as_json(options={})
-		super(:only => [:id, :description, :calories, :ate_at_date, :ate_at_time])
+		data = super(only: [:id, :description, :calories, :ate_at_date, :ate_at_time])
+		data['ate_at_time'] = ate_at_time.strftime('%H:%M') if data.key? 'ate_at_time'
+		data['ate_at_date'] = ate_at_date.strftime('%Y-%m-%d') if data.key? 'ate_at_date'
+		data
 	end
 end
