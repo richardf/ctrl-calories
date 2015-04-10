@@ -11,16 +11,16 @@
 			<div class="col-md-4 form-inline">
 				<div class="form-group pull-right">
 					<label class="control-label"><i class="glyphicon glyphicon-calendar"></i> Start</label>
-						<input type="text" size="8" class="form-control" ng-model="filterStartDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
-						<input type="text" size="5" class="form-control" ng-model="filterStartTime" placeholder="Time">
+						<input type="text" size="8" class="form-control" ng-model="filter.startDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
+						<input type="text" size="5" class="form-control" ng-model="filter.startTime" placeholder="Time">
 				</div>
 			</div>
 
 			<div class="col-md-4 form-inline">
 				<div class="form-group pull-right">
 					<label class="control-label"><i class="glyphicon glyphicon-calendar"></i> End</label>
-						<input type="text" size="8" class="form-control" ng-model="filterEndDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
-						<input type="text" size="5" class="form-control" ng-model="filterEndTime" data-autoclose="1" placeholder="Time" bs-timepicker data-time-format="HH:mm" data-time-type="string" data-minute-step="15" data-round-display="true" data-default-time="false">
+						<input type="text" size="8" class="form-control" ng-model="filter.endDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
+						<input type="text" size="5" class="form-control" ng-model="filter.endTime" data-autoclose="1" placeholder="Time" bs-timepicker data-time-format="HH:mm" data-time-type="string" data-minute-step="15" data-round-display="true" data-default-time="false">
 				</div>
 			</div>
 
@@ -53,7 +53,7 @@
 						<td>{{meal.description}}</td>
 						<td>{{meal.calories}}</td>
 						<td>{{meal.ate_at_date | date:'dd-MMMM-yyyy'}}</td>
-						<td>{{meal.ate_at_time | date:'hh:mm'}}</td>
+						<td>{{meal.ate_at_time}}</td>
 						<td>
 							<button class="btn btn-default btn-xs" data-title="Edit" data-toggle="modal" data-target="#editMeal" value="{{meal.id}}" ng-click="prepareToUpdate($event)"><span class="glyphicon glyphicon-pencil" value="{{meal.id}}"></span></button>
 
@@ -65,7 +65,7 @@
 			<div class="clearfix"></div>
 		</div>
 
-		<div id="consumedCal" class="pull-right" ng-class="{green : profile.consumed_calories < profile.expected_calories, red : profile.consumed_calories >= profile.expected_calories}">
+		<div id="consumedCal" class="pull-right" ng-class="{green : profile.consumed_calories <= profile.expected_calories, red : profile.consumed_calories > profile.expected_calories}">
 			Calories consumed today: {{profile.consumed_calories}}
 		</div>
 	</div>
@@ -105,7 +105,7 @@
 					</div>
 
 					<div class="col-xs-12 form-group">
-		 				<button type="button" class="btn btn-success btn-lg btn-block" ng-click="updateMeal(mealToUpdate)"> Update</button>
+		 				<button type="button" class="btn btn-success btn-lg btn-block" ng-click="updateMeal(mealToUpdate)" data-dismiss="modal"> Update</button>
 					</div>	
  				</div>
  				<div class="clearfix"></div>
