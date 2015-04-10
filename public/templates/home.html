@@ -10,7 +10,7 @@
 
 			<div class="col-md-4 form-inline">
 				<div class="form-group pull-right">
-					<label class="control-label"><i class="glyphicon glyphicon-calendar"></i> Start datetime</label>
+					<label class="control-label"><i class="glyphicon glyphicon-calendar"></i> Start</label>
 						<input type="text" size="8" class="form-control" ng-model="filterStartDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
 						<input type="text" size="5" class="form-control" ng-model="filterStartTime" placeholder="Time">
 				</div>
@@ -18,7 +18,7 @@
 
 			<div class="col-md-4 form-inline">
 				<div class="form-group pull-right">
-					<label class="control-label"><i class="glyphicon glyphicon-calendar"></i> End datetime</label>
+					<label class="control-label"><i class="glyphicon glyphicon-calendar"></i> End</label>
 						<input type="text" size="8" class="form-control" ng-model="filterEndDt" data-autoclose="1" placeholder="Date" bs-datepicker data-date-format="dd-MMM-yy">
 						<input type="text" size="5" class="form-control" ng-model="filterEndTime" data-autoclose="1" placeholder="Time" bs-timepicker data-time-format="HH:mm" data-time-type="string" data-minute-step="15" data-round-display="true" data-default-time="false">
 				</div>
@@ -131,29 +131,29 @@
  				<div class="form-row">
 	 				<div class="col-xs-12 form-group">
 	 					<label for="description" class="control-label">Description</label>
-	 					<input name="description" class="form-control " type="text">
+	 					<input name="description" class="form-control " type="text" ng-model="newMeal.description">
 	 				</div>
  				</div>
 
  				<div class="form-row">
 	 				<div class="col-xs-3 form-group">
 						<label for="calories" class="control-label">Calories</label>
-	 					<input class="form-control" name="calories" type="number" min="1" max="10000">
+	 					<input class="form-control" name="calories" type="number" min="1" max="10000" ng-model="newMeal.calories">
 	 				</div> 		 				
 
 
 	 				<div class="col-xs-6 form-group">
 	 					<label class="control-label" for=""><i class="glyphicon glyphicon-calendar"></i> Date</label>
-						<input type="text" size="8" class="form-control" ng-model="filterStartDt" data-autoclose="1" bs-datepicker data-date-format="dd-MMM-yy">
+						<input type="text" size="8" class="form-control" ng-model="newMeal.ate_at_date" data-autoclose="1" bs-datepicker data-date-format="dd-MMM-yy">
 					</div>
 
 					<div class="col-xs-3 form-group">
 	 					<label class="control-label" for=""> Time</label>
-						<input type="text" size="5" class="form-control" ng-model="filterStartTime">
+						<input type="text" size="5" class="form-control" ng-model="newMeal.ate_at_time">
 					</div>
 
 					<div class="col-xs-12 form-group">
-		 				<button type="button" class="btn btn-success btn-lg btn-block"> Save</button>
+		 				<button type="button" class="btn btn-success btn-lg btn-block" ng-click="createMeal(newMeal)" data-dismiss="modal"> Save</button>
 					</div>	
  				</div>
  				<div class="clearfix"></div>
