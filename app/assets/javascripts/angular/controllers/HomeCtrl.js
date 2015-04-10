@@ -9,4 +9,14 @@ angular.module('CtrlCalories')
         		$scope.filterEndTime = null;
         	};
 
+    		function loadProfile() {
+	        	Profile.get().success(function(data) {
+	        		$scope.profile = data;
+	        	}).error(function(err) {
+	        		$scope.error = err.error;
+	        	});
+    		};
+
+
+    		loadProfile();        	
         }]);

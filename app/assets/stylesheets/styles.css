@@ -17,6 +17,14 @@ body {
 	height: 50px;
 }
 
+.green {
+	color: green;
+}
+
+.red {
+	color: red;
+}
+
 /*input.form-control-req.ng-invalid.ng-touched {
 	border-color: #FA787E;
 }

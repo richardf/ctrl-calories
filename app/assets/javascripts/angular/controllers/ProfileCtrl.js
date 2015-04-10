@@ -27,9 +27,8 @@ angular.module('CtrlCalories')
     		function loadProfile() {
 	        	Profile.get().success(function(data) {
 	        		$scope.profile = data;
-	        		console.log(data);
 	        	}).error(function(err) {
-	        		console.log(err);
+	        		$scope.error = err.error;
 	        	});
     		};
 
