@@ -1,6 +1,6 @@
 angular.module('CtrlCalories')
-    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'Profile',
-        function ($rootScope, $scope, $location, Auth, Profile) {
+    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'Profile', 'Meal',
+        function ($rootScope, $scope, $location, Auth, Profile, Meal) {
 
         	$scope.clearFilter = function() {
         		$scope.filterStartDt = null;
@@ -17,6 +17,16 @@ angular.module('CtrlCalories')
 	        	});
     		};
 
+    		function loadMeals() {
+	        	Meal.get().success(function(data) {
+	        		$scope.meals = data;
+	        		console.log(data);
+	        	}).error(function(err) {
+	        		$scope.error = err.error;
+	        	});
+    		};
 
-    		loadProfile();        	
+
+    		loadProfile();    
+    		loadMeals();    	
         }]);
