@@ -9,6 +9,19 @@ angular.module('CtrlCalories')
         		$scope.filterEndTime = null;
         	};
 
+        	$scope.prepareToDelete = function(event) {
+				$scope.mealToDelete = event.target.getAttribute("value");
+        	};
+
+        	$scope.deleteMeal = function() {
+	        	Meal.delete($scope.mealToDelete).success(function() {
+	        		$scope.mealToDelete = null;
+	        		loadMeals();
+	        	}).error(function(err) {
+	        		$scope.error = err.error;
+	        	});
+        	};
+
     		function loadProfile() {
 	        	Profile.get().success(function(data) {
 	        		$scope.profile = data;
@@ -20,7 +33,6 @@ angular.module('CtrlCalories')
     		function loadMeals() {
 	        	Meal.get().success(function(data) {
 	        		$scope.meals = data;
-	        		console.log(data);
 	        	}).error(function(err) {
 	        		$scope.error = err.error;
 	        	});
