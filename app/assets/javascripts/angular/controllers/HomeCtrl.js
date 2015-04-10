@@ -3,10 +3,10 @@ angular.module('CtrlCalories')
         function ($rootScope, $scope, $location, Auth, Profile, Meal) {
 
         	$scope.clearFilter = function() {
-        		$scope.filterStartDt = null;
-        		$scope.filterStartTime = null;
-        		$scope.filterEndDt = null;
-        		$scope.filterEndTime = null;
+        		$scope.filter.startDt = null;
+        		$scope.filter.startTime = null;
+        		$scope.filter.endDt = null;
+        		$scope.filter.endTime = null;
         	};
 
         	$scope.prepareToDelete = function(event) {
