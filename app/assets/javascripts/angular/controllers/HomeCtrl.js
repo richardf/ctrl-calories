@@ -1,6 +1,6 @@
 angular.module('CtrlCalories')
-    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', 'Auth',
-        function ($rootScope, $scope, $location, Auth) {
+    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'Profile',
+        function ($rootScope, $scope, $location, Auth, Profile) {
 
         	$scope.clearFilter = function() {
         		$scope.filterStartDt = null;
@@ -8,6 +8,5 @@ angular.module('CtrlCalories')
         		$scope.filterEndDt = null;
         		$scope.filterEndTime = null;
         	};
-
 
         }]);

@@ -32,10 +32,10 @@ angular.module('CtrlCalories')
 
         return {
             signup: function (data, success, error) {
-                $http.post(urls.BASE + '/api/profile', data).success(success).error(error)
+                $http.post('/api/profile', data).success(success).error(error)
             },
             signin: function (data, success, error) {
-                $http.post(urls.BASE + '/api/auth', data).success(success).error(error)
+                $http.post('/api/auth', data).success(success).error(error)
             },
             logout: function (success) {
                 tokenClaims = {};

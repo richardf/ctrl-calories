@@ -6,8 +6,8 @@ Meal.destroy_all
 User.destroy_all
 
 users = User.create([
-  {name: 'Mr Foo', login: 'foo', expected_calories: 2000, password: "foobar"},
-  {name: 'Luke Skywalker', login: 'luke', expected_calories: 5000, password: "foobar"}
+  {name: 'Mr Foo', login: 'foo@bar.com', expected_calories: 2000, password: "foobar"},
+  {name: 'Luke Skywalker', login: 'luke@sw.com', expected_calories: 5000, password: "foobar"}
 ])
 
 Meal.create([
