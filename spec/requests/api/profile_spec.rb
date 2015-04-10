@@ -4,7 +4,7 @@ describe "Profile API",  type: :request do
 
   context 'when registering' do
     context 'a valid user' do
-      before(:each) { post '/api/profile', {user: {login: 'syme', name: 'Syme', password: 'foobar', password_confirmation: 'foobar'}} }
+      before(:each) { post '/api/profile', {user: {login: 'syme', name: 'Syme', password: 'foobar'}} }
 
       it 'should return status created' do
         expect(response).to have_http_status :created
@@ -27,12 +27,6 @@ describe "Profile API",  type: :request do
         post '/api/profile', {user: {login: 'foo', password: 'foo'}}
         expect(response).to have_http_status :unprocessable_entity
         expect(json_body[:error]).to include('Password is too short (minimum is 6 characters)')
-      end
-
-      it 'should return error if password confirmation doesnt match' do
-        post '/api/profile', {user: {login: 'foo', password: 'foobar', password_confirmation: 'barbar'}}
-        expect(response).to have_http_status :unprocessable_entity
-        expect(json_body[:error]).to include('Password confirmation doesn\'t match Password')
       end
 
       it 'should return error if login is too short' do
@@ -72,7 +66,7 @@ describe "Profile API",  type: :request do
     end
 
     it 'should be able to use the new password' do
-      put '/api/profile', {user: {password: 'new_password', password_confirmation: 'new_password'}}, auth_header(user.login, user.password)
+      put '/api/profile', {user: {password: 'new_password'}}, auth_header(user.login, user.password)
       expect(response).to have_http_status :no_content
       post '/api/auth', {login: user.login, password: 'new_password'}
       expect(response).to have_http_status :ok

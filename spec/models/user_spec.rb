@@ -88,15 +88,11 @@ RSpec.describe User, type: :model do
 
   context 'validate password' do
     it 'is true with valid password' do
-      expect(User.password_valid?('good_password', 'good_password')).to be true
+      expect(User.password_valid?('good_password')).to be true
     end
 
     it 'is false with short password' do
-      expect(User.password_valid?('short', 'short')).to be false
-    end
-
-    it 'is false with password and confirmation different' do
-      expect(User.password_valid?('password123', '123password')).to be false
+      expect(User.password_valid?('short')).to be false
     end
   end
 

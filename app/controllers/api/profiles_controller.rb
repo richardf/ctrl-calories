@@ -4,7 +4,7 @@ class API::ProfilesController < ApplicationController
 
 
   def create
-    profile_params = params.require(:user).permit(:name, :login, :password, :password_confirmation, :expected_calories)
+    profile_params = params.require(:user).permit(:name, :login, :password, :expected_calories)
     user = User.create(profile_params)
 
     if user.persisted?
@@ -22,9 +22,9 @@ class API::ProfilesController < ApplicationController
   end
 
   def update
-    profile_params = params.require(:user).permit(:name, :password, :password_confirmation, :expected_calories)
+    profile_params = params.require(:user).permit(:name, :password, :expected_calories)
 
-    if profile_params.include?(:password) && !User.password_valid?(profile_params[:password], profile_params[:password_confirmation])
+    if profile_params.include?(:password) && !User.password_valid?(profile_params[:password])
       render json: { error: 'Invalid password' }, status: :unprocessable_entity 
     else
       user = User.update(@current_user.id, profile_params)

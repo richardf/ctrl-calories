@@ -14,14 +14,12 @@ angular.module('CtrlCalories')
     			}
     			
     			Profile.update(userProfile).success(function() {
-    				console.log('yay');
 					$scope.notice = "Your profile was updated.";
 					$scope.error = null;
 
 	        	}).error(function(err) {
 	        		$scope.error = err.error;
 	        		$scope.notice = null;
-	        		console.log(err);
 	        	});
     		};
 

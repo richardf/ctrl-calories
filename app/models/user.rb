@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   validates :login, presence: true, uniqueness: true, length: {minimum:  3}
   validates :expected_calories, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
   validates :password, :length => { :minimum => 6 }, on: :create
-  validates_confirmation_of :password
 
   scope :calories_today, -> { includes(:meals).where("meals.ate_at_date = ?", Date.current).references(:meals).sum(:calories)}
 
@@ -21,8 +20,8 @@ class User < ActiveRecord::Base
   end
 
   # to deal with has_secure_password updates
-  def self.password_valid?(password, confirmation)
-    return false if password.blank? || password.size < 6 || password != confirmation
+  def self.password_valid?(password)
+    return false if password.blank? || password.size < 6
     true
   end
 
