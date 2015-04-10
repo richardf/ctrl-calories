@@ -55,12 +55,9 @@
 						<td>{{meal.ate_at_date | date:'dd-MMMM-yyyy'}}</td>
 						<td>{{meal.ate_at_time | date:'hh:mm'}}</td>
 						<td>
-							<span data-placement="top" data-toggle="tooltip" title="Edit">
-								<button class="btn btn-default btn-xs" data-title="Edit" data-toggle="modal" data-target="#editMeal" value="{{meal.id}}"><span class="glyphicon glyphicon-pencil" value="{{meal.id}}"></span></button>
-							</span>
-							<span data-placement="top" data-toggle="tooltip" title="Delete">
-								<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#deleteMeal" ng-click="prepareToDelete($event)" value="{{meal.id}}"><span value="{{meal.id}}" class="glyphicon glyphicon-trash"></span></button>
-							</span>
+							<button class="btn btn-default btn-xs" data-title="Edit" data-toggle="modal" data-target="#editMeal" value="{{meal.id}}" ng-click="prepareToUpdate($event)"><span class="glyphicon glyphicon-pencil" value="{{meal.id}}"></span></button>
+
+							<button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#deleteMeal" ng-click="prepareToDelete($event)" value="{{meal.id}}"><span value="{{meal.id}}" class="glyphicon glyphicon-trash"></span></button>
 						</td>
 					</tr>
 				</tbody>
@@ -83,32 +80,32 @@
  				<h4 class="modal-title custom_align" id="Heading">Edit Your Meal</h4>
  			</div>
  			<div class="modal-body">
+ 				<div class="hidden"></div>
  				<div class="form-row">
 	 				<div class="col-xs-12 form-group">
 	 					<label for="description" class="control-label">Description</label>
-	 					<input name="description" class="form-control " type="text">
+	 					<input name="description" class="form-control " type="text" ng-model="mealToUpdate.description">
 	 				</div>
  				</div>
 
  				<div class="form-row">
 	 				<div class="col-xs-3 form-group">
 						<label for="calories" class="control-label">Calories</label>
-	 					<input class="form-control" name="calories" type="number" min="1" max="10000">
+	 					<input class="form-control" name="calories" type="number" min="1" max="10000" ng-model="mealToUpdate.calories">
 	 				</div> 		 				
-
 
 	 				<div class="col-xs-6 form-group">
 	 					<label class="control-label" for=""><i class="glyphicon glyphicon-calendar"></i> Date</label>
-						<input type="text" size="8" class="form-control" ng-model="filterStartDt" data-autoclose="1" bs-datepicker data-date-format="dd-MMM-yy">
+						<input type="text" size="8" class="form-control" ng-model="mealToUpdate.ate_at_date" data-autoclose="1" bs-datepicker data-date-format="dd-MMM-yy">
 					</div>
 
 					<div class="col-xs-3 form-group">
 	 					<label class="control-label" for=""> Time</label>
-						<input type="text" size="5" class="form-control" ng-model="filterStartTime">
+						<input type="text" size="5" class="form-control" ng-model="mealToUpdate.ate_at_time">
 					</div>
 
 					<div class="col-xs-12 form-group">
-		 				<button type="button" class="btn btn-success btn-lg btn-block"> Update</button>
+		 				<button type="button" class="btn btn-success btn-lg btn-block" ng-click="updateMeal(mealToUpdate)"> Update</button>
 					</div>	
  				</div>
  				<div class="clearfix"></div>

@@ -34,15 +34,27 @@ angular.module('CtrlCalories')
                 });
             };            
 
-            $scope.updateMeal = function(meal) {
-                Meal.update(id, meal).success(function() {
+            $scope.prepareToUpdate = function(event) {
+                var mealId = event.target.getAttribute("value");
+                $scope.mealToUpdate = angular.copy(getMealById(mealId));;
+            };
+
+            $scope.updateMeal = function() {
+                var meal = $scope.mealToUpdate;
+                Meal.update(meal.id, meal).success(function() {
                     loadProfile();
                     loadMeals();
-                    $scope.updateMeal = null;
+                    $scope.mealToUpdate = null;
                 }).error(function(err) {
                     console.log(err);
                     $scope.error = err.error;
                 });
+            };
+
+            function getMealById(id) {
+                return $scope.meals.filter(function( obj ) {
+                    return +obj.id === +id;
+                })[ 0 ];
             };
 
     		function loadProfile() {
