@@ -19,26 +19,22 @@
 				<div class="col-xs-12 form-group">
 					<label for="name" class="control-label">Name</label>
 					<input type="text" class="form-control" id="name" name="name" title="Please enter your name" placeholder="Donald Knuth" ng-model="profile.name">
-					<span class="help-block"></span>
 				</div>
 			</div>
 			<div class='form-row'>
 				<div class="col-xs-12 form-group">
 					<label for="login" class="control-label">Email</label>
 					<input type="email" class="form-control" id="login" name="login" ng-model="profile.login" disabled>
-					<span class="help-block"></span>
 				</div>
 			</div>
 			<div class='form-row'>
 				<div class="col-xs-6 form-group">
 					<label for="password" class="control-label">New Password</label>
 					<input type="password" class="form-control" id="password" name="password" title="Please enter your new password" ng-model="profile.password" placeholder="At least 6 characters">
-					<span class="help-block"></span>
 				</div>
 				<div class="col-xs-6 form-group">
 					<label for="passwordConf" class="control-label">Password Confirmation</label>
 					<input type="password" class="form-control" id="passwordConf" name="passwordConf" title="Please confirm your password" ng-model="passwordConf">
-					<span class="help-block"></span>
 				</div>
 			</div>
 			<div class='form-row'>
@@ -50,7 +46,6 @@
 
 			<div class='form-row'>
 				<div class="col-xs-12 form-group">
-					<div id="errorMsg" class="alert alert-error" ng-show="error">Something went wrong</div>
 					<button type="submit" class="btn btn-success" ng-click="updateProfile(profile)">Update Profile</button>
 					<button class="btn btn-default" onclick="window.history.go(-1);">Back</button>
 				</div>
