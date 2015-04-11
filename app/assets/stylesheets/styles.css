@@ -25,10 +25,9 @@ body {
 	color: red;
 }
 
-/*input.form-control-req.ng-invalid.ng-touched {
-	border-color: #FA787E;
+.valdr-message {
+	display: none;
 }
-
-input.form-control-req.ng-valid.ng-touched {
-	border-color: #78FA89;
-}*/
+.valdr-message.ng-dirty.ng-invalid.ng-touched {
+	display: inline;
+}
