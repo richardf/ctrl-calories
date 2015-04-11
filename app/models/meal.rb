@@ -9,6 +9,7 @@ class Meal < ActiveRecord::Base
 	validates :ate_at_date, presence: true
 	validates :ate_at_time, presence: true
 
+	default_scope { order('ate_at_date, ate_at_time') } 
 	scope :start_date,	-> (date) {where("ate_at_date >= ?", date)}
 	scope :end_date,	-> (date) {where("ate_at_date <= ?", date)}
 	scope :start_time,	-> (time) {where("strftime('%H:%M', ate_at_time) >= ?", time)}

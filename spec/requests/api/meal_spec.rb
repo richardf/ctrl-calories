@@ -16,6 +16,18 @@ describe "Meal API",  type: :request do
       expect(json_body.size).to eq 3
     end
 
+    it 'should order by date/time ascending' do
+      user = create(:user)
+      Meal.create(description: 'food 1', user: user, ate_at_date: '2015-04-11', ate_at_time: '11:00', calories: 100);
+      Meal.create(description: 'food 2', user: user, ate_at_date: '2015-04-10', ate_at_time: '11:00', calories: 100);
+      Meal.create(description: 'food 3', user: user, ate_at_date: '2015-04-10', ate_at_time: '13:00', calories: 100);
+
+      get '/api/profile/meals', {}, auth_header(user.login, user.password)
+      expect(json_body[0][:description]).to eq('food 2')
+      expect(json_body[1][:description]).to eq('food 3')
+      expect(json_body[2][:description]).to eq('food 1')
+    end
+
     context 'with filter' do
       let(:f_user) {create(:user)}
       let!(:meal_one) {Meal.create(user: f_user, ate_at_time: '09:30', ate_at_date: '2015-04-03', description: 'fish', calories: 300)}
