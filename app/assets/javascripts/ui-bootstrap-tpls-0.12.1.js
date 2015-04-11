@@ -1519,7 +1519,6 @@ function ($compile, $parse, $document, $position, dateFilter, dateParser, datepi
         if (angular.isDefined(dt)) {
           scope.date = dt;
         }
-        scope.date.setMinutes(scope.date.getMinutes() - scope.date.getTimezoneOffset());
         ngModel.$setViewValue(scope.date);
         ngModel.$render();
 
