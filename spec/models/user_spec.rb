@@ -14,8 +14,8 @@ RSpec.describe User, type: :model do
       expect(subject.valid?).to be false
     end
 
-    it 'with less than 3 characters' do
-      subject.login = 'fo'
+    it 'if login is not an email' do
+      subject.login = 'foooooo'
       subject.valid?
       expect(subject.errors).to include(:login)
     end
@@ -65,9 +65,9 @@ RSpec.describe User, type: :model do
     end
 
     it 'should save login as lowercase' do
-      subject.login = 'UPCASE_LOGIN'
+      subject.login = 'UPCASE@EMAIL.COM'
       subject.save
-      expect(User.last.login).to eq('upcase_login')
+      expect(User.last.login).to eq('upcase@email.com')
     end
   end
 

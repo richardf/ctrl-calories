@@ -4,14 +4,14 @@ describe "Profile API",  type: :request do
 
   context 'when registering' do
     context 'a valid user' do
-      before(:each) { post '/api/profile', {user: {login: 'syme', name: 'Syme', password: 'foobar'}} }
+      before(:each) { post '/api/profile', {user: {login: 'syme@email.com', name: 'Syme', password: 'foobar'}} }
 
       it 'should return status created' do
         expect(response).to have_http_status :created
       end
 
       it 'should register the user into system' do
-        expect(User.find_by(login: 'syme')).not_to be nil
+        expect(User.find_by(login: 'syme@email.com')).not_to be nil
       end
     end
 
@@ -23,16 +23,16 @@ describe "Profile API",  type: :request do
         expect(json_body[:error]).to include('Login has already been taken')
       end
 
-      it 'should return error if user is password is too short' do
-        post '/api/profile', {user: {login: 'foo', password: 'foo'}}
+      it 'should return error if password is too short' do
+        post '/api/profile', {user: {login: 'foo@email.com', password: 'foo'}}
         expect(response).to have_http_status :unprocessable_entity
         expect(json_body[:error]).to include('Password is too short (minimum is 6 characters)')
       end
 
-      it 'should return error if login is too short' do
-        post '/api/profile', {user: {login: 'f', password: 'foobar'}}
+      it 'should return error if login is not an email' do
+        post '/api/profile', {user: {login: 'foooooo', password: 'foobar'}}
         expect(response).to have_http_status :unprocessable_entity
-        expect(json_body[:error]).to include('Login is too short (minimum is 3 characters)')
+        expect(json_body[:error]).to include('Login is invalid')
       end
 
       it 'should return error if login is not informed' do
@@ -53,7 +53,7 @@ describe "Profile API",  type: :request do
     end
 
     it 'should not update login' do
-      put '/api/profile', {user: {login: 'new_login'}}, auth_header(user.login, user.password)
+      put '/api/profile', {user: {login: 'new@login.com'}}, auth_header(user.login, user.password)
       expect(response).to have_http_status :no_content
       expect(User.find(user.id).login).to eq(user.login)
     end
