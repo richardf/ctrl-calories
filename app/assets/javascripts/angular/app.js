@@ -8,13 +8,30 @@ angular.module('CtrlCalories', ['ngRoute', 'ui.bootstrap', 'valdr'])
 	}])
 
 	.config(function(valdrProvider) {
+		valdrProvider.addValidator('passwordConfValidator');
 		valdrProvider.addConstraints({
 			'Meal' : {},
 			'Profile' : {},
 			'signin' : {
 				'login' : {
-					'required' : {'message' : 'Please inform your email.'},
 					'email' : {'message' : 'Please inform a valid email.'}
+				}
+			},
+			'signup' : {
+				'login' : {
+					'email' : {'message' : 'Please inform a valid email.'}
+				},
+				'password' : {
+					'size' : {
+						'min' : 6,
+						'message': 'Please use at least 6 characters.'
+					}
+				},
+				'passwordConf' : {
+					'passwordConfValidator' : {
+						'passwordField' : '#password',
+						'message' : 'Passwords do not match.'
+					}
 				}
 			}
 		});
