@@ -3,10 +3,8 @@ angular.module('CtrlCalories')
         function ($rootScope, $scope, $location, Auth, Profile, Meal) {
 
         	$scope.clearFilter = function() {
-        		$scope.filter.startDt = null;
-        		$scope.filter.startTime = null;
-        		$scope.filter.endDt = null;
-        		$scope.filter.endTime = null;
+                $scope.filter = null;
+                loadMeals();
         	};
 
         	$scope.prepareToDelete = function(event) {
@@ -55,6 +53,10 @@ angular.module('CtrlCalories')
                 $event.preventDefault();
                 $event.stopPropagation();
                 $scope.datepickers[pickerName] = !$scope.datepickers[pickerName];
+            };
+
+            $scope.filterMeals = function() {
+                loadMeals();
             };            
 
             function getMealById(id) {
@@ -72,7 +74,7 @@ angular.module('CtrlCalories')
     		};
 
     		function loadMeals() {
-	        	Meal.get().success(function(data) {
+	        	Meal.get($scope.filter).success(function(data) {
 	        		$scope.meals = data;
 	        	}).error(function(err) {
 	        		$scope.error = err.error;
