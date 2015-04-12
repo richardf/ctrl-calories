@@ -20,7 +20,7 @@ describe "Profile API",  type: :request do
         u = create(:user)
         post '/api/profile', {user: {login: u.login, password: 'foobar'}}
         expect(response).to have_http_status :unprocessable_entity
-        expect(json_body[:error]).to include('Login has already been taken')
+        expect(json_body[:error]).to include('Email has already been taken')
       end
 
       it 'should return error if password is too short' do
@@ -32,13 +32,13 @@ describe "Profile API",  type: :request do
       it 'should return error if login is not an email' do
         post '/api/profile', {user: {login: 'foooooo', password: 'foobar'}}
         expect(response).to have_http_status :unprocessable_entity
-        expect(json_body[:error]).to include('Login is invalid')
+        expect(json_body[:error]).to include('Email is invalid')
       end
 
       it 'should return error if login is not informed' do
         post '/api/profile', {user: {password: 'foobar'}}
         expect(response).to have_http_status :unprocessable_entity
-        expect(json_body[:error]).to include('Login can\'t be blank')
+        expect(json_body[:error]).to include('Email can\'t be blank')
       end
     end
   end
