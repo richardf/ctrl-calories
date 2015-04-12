@@ -25,6 +25,7 @@ angular.module('CtrlCalories')
                 Meal.create(meal).success(function() {
                     loadProfile();
                     loadMeals();
+                    $scope.newMealForm.$setPristine();
                     $scope.newMeal = null;
                 }).error(function(err) {
                     console.log(err);
@@ -47,6 +48,12 @@ angular.module('CtrlCalories')
                     console.log(err);
                     $scope.error = err.error;
                 });
+            };
+
+            $scope.prepareNewMeal = function() {
+                $scope.newMealForm.$setPristine();
+                $scope.newMeal = null;
+
             };
 
             $scope.openPicker = function(pickerName, $event) {
