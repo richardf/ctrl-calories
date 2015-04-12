@@ -24,7 +24,11 @@ angular.module('CtrlCalories', ['ngRoute', 'ui.bootstrap', 'valdr'])
 					'required' : { 'message': 'This field is required.' }
 				},
 				'ate_at_time' : {
-					'required' : { 'message': 'This field is required.' }
+					'required' : { 'message': 'This field is required.' },
+					'pattern' : { 
+						'value' : /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/, 
+						'message' : 'Invalid time'
+					}
 				}
 			},
 			'signin' : {
