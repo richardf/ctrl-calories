@@ -1,5 +1,5 @@
 angular.module('CtrlCalories')
-    .factory('Auth', ['$http', 'urls', function ($http, urls) {
+    .factory('Auth', ['$http', function ($http) {
         function urlBase64Decode(str) {
             //jwt uses base64 url encoder. Some conversion is necessary.
             var output = str.replace('-', '+').replace('_', '/');
