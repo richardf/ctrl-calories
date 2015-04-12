@@ -34,7 +34,7 @@
 				</div>
 				<div class="col-xs-6 form-group">
 					<label for="passwordConf" class="control-label">Password Confirmation</label>
-					<input type="password" class="form-control" id="passwordConf" name="passwordConf" title="Please confirm your password" ng-model="passwordConf">
+					<input type="password" class="form-control" id="passwordConf" name="passwordConf" title="Please confirm your password" ng-model="profile.passwordConf">
 				</div>
 			</div>
 			<div class='form-row'>
@@ -46,7 +46,7 @@
 
 			<div class='form-row'>
 				<div class="col-xs-12 form-group">
-					<button type="submit" class="btn btn-success" ng-click="updateProfile(profile)">Update Profile</button>
+					<button type="submit" class="btn btn-success" ng-click="updateProfile(profile)" ng-disabled="!profileForm.$valid">Update Profile</button>
 					<button class="btn btn-default" onclick="window.history.go(-1);">Back</button>
 				</div>
 			</div>

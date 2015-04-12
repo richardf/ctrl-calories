@@ -20,8 +20,6 @@ angular.module('CtrlCalories')
 					apiUrl = apiUrl.slice(0,-1);
 				}
 
-				console.log(apiUrl);
-
 				return $http({method: 'GET', url: apiUrl});
 			},
 			update: function(id, meal) {

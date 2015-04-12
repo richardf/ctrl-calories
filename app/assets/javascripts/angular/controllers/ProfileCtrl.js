@@ -3,13 +3,16 @@ angular.module('CtrlCalories')
     	function ($rootScope, $scope, $location, Auth, Profile) {
 
     		$scope.updateProfile = function(profile) {
+                if(!validatePassword(profile.password, profile.passwordConf)) {
+                    $scope.notice = null;
+                    return;
+                }
+
     			var userProfile = {user: {}};
     			userProfile.user.name = profile.name;
-
-    			if(profile.expected_calories != null) {
-    				userProfile.user.expected_calories = profile.expected_calories;	
-    			}
-    			if(profile.password != null && profile.password.trim()) {
+    			userProfile.user.expected_calories = profile.expected_calories;	
+    			
+                if(profile.password != null && profile.password.trim()) {
     				userProfile.user.password = profile.password.trim(); 
     			}
     			
@@ -23,6 +26,17 @@ angular.module('CtrlCalories')
 	        	});
     		};
 
+            function validatePassword(passwd, passwdConf) {
+                if(passwd !== passwdConf) {
+                    $scope.error = 'Passwords do not match.'
+                    return false;
+                }                
+                else if(passwd !== undefined && passwd.length > 0 && passwd.length < 6) {
+                    $scope.error = 'Password must have at least 6 characters.'
+                    return false;
+                }
+                return true;
+            }
 
     		function loadProfile() {
 	        	Profile.get().success(function(data) {

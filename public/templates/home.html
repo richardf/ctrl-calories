@@ -83,7 +83,7 @@
 			<div class="clearfix"></div>
 		</div>
 
-		<div id="consumedCal" class="pull-right" ng-class="{green : profile.consumed_calories <= profile.expected_calories, red : profile.consumed_calories > profile.expected_calories}">
+		<div id="consumedCal" class="pull-right" ng-class="getClassForCalCounter(profile)">
 			Calories consumed today: {{profile.consumed_calories}}
 		</div>
 	</div>
@@ -97,38 +97,37 @@
  				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
  				<h4 class="modal-title custom_align" id="Heading">Edit Your Meal</h4>
  			</div>
- 			<div class="modal-body">
- 				<div class="hidden"></div>
+ 			<div class="modal-body" ng-form="editMealForm" valdr-type="meal">
  				<div class="form-row">
-	 				<div class="col-xs-12 form-group">
+	 				<div class="col-xs-12 form-group" valdr-form-group>
 	 					<label for="description" class="control-label">Description</label>
 	 					<input name="description" class="form-control " type="text" ng-model="mealToUpdate.description">
 	 				</div>
  				</div>
 
  				<div class="form-row">
-	 				<div class="col-xs-3 form-group">
+	 				<div class="col-xs-3 form-group" valdr-form-group>
 						<label for="calories" class="control-label">Calories</label>
 	 					<input class="form-control" name="calories" type="number" min="1" max="10000" ng-model="mealToUpdate.calories">
 	 				</div> 		 				
 
-	 				<div class="col-xs-6 form-group">
+	 				<div class="col-xs-6 form-group" valdr-form-group>
 	 					<label class="control-label" for="ate_at">Date</label>
 	 					<p class="input-group">
-	 						<input type="text" ng-bootstrap-fix class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="mealToUpdate.ate_at_date" is-open="datepickers.editmodal" ng-focus="openPicker('editmodal', $event)" name="ate_at"/>
+	 						<input type="text" ng-bootstrap-fix class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="mealToUpdate.ate_at_date" is-open="datepickers.editmodal" ng-focus="openPicker('editmodal', $event)" name="ate_at_date"/>
 	 						<span class="input-group-btn">
 	 							<button type="button" class="btn btn-default" ng-click="openPicker('editmodal', $event)"><i class="glyphicon glyphicon-calendar"></i></button>
 	 						</span>
 	 					</p>	 					
 					</div>
 
-					<div class="col-xs-3 form-group">
+					<div class="col-xs-3 form-group" valdr-form-group>
 	 					<label class="control-label" for=""> Time</label>
-						<input type="text" size="5" class="form-control" ng-model="mealToUpdate.ate_at_time">
+						<input type="text" name="ate_at_time" size="5" class="form-control" ng-model="mealToUpdate.ate_at_time">
 					</div>
 
 					<div class="col-xs-12 form-group">
-		 				<button type="button" class="btn btn-success btn-lg btn-block" ng-click="updateMeal(mealToUpdate)" data-dismiss="modal"> Update</button>
+		 				<button type="button" class="btn btn-success btn-lg btn-block" ng-click="updateMeal(mealToUpdate)" data-dismiss="modal" ng-disabled="!editMealForm.$valid"> Update</button>
 					</div>	
  				</div>
  				<div class="clearfix"></div>
@@ -147,38 +146,38 @@
  				<button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
  				<h4 class="modal-title custom_align" id="Heading">Add a Meal</h4>
  			</div>
- 			<div class="modal-body">
+ 			<div class="modal-body" ng-form="newMealForm" valdr-type="meal">
  				<div class="form-row">
-	 				<div class="col-xs-12 form-group">
+	 				<div class="col-xs-12 form-group" valdr-form-group>
 	 					<label for="description" class="control-label">Description</label>
-	 					<input name="description" class="form-control " type="text" ng-model="newMeal.description">
+	 					<input name="description" class="form-control" type="text" ng-model="newMeal.description">
 	 				</div>
  				</div>
 
  				<div class="form-row">
-	 				<div class="col-xs-3 form-group">
+	 				<div class="col-xs-3 form-group" valdr-form-group>
 						<label for="calories" class="control-label">Calories</label>
 	 					<input class="form-control" name="calories" type="number" min="1" max="10000" ng-model="newMeal.calories">
 	 				</div> 		 				
 
 
-	 				<div class="col-xs-6 form-group">
+	 				<div class="col-xs-6 form-group" valdr-form-group>
 	 					<label class="control-label" for="ate_at"> Date</label>
 	 					<p class="input-group">
-	 						<input type="text" ng-bootstrap-fix class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="newMeal.ate_at_date" is-open="datepickers.newmodal" ng-focus="openPicker('newmodal', $event)" name="ate_at"/>
+	 						<input type="text" ng-bootstrap-fix class="form-control" datepicker-popup="dd-MMMM-yyyy" ng-model="newMeal.ate_at_date" is-open="datepickers.newmodal" ng-focus="openPicker('newmodal', $event)" name="ate_at_date"/>
 	 						<span class="input-group-btn">
 	 							<button type="button" class="btn btn-default" ng-click="openPicker('newmodal', $event)"><i class="glyphicon glyphicon-calendar"></i></button>
 	 						</span>
 	 					</p>
 					</div>
 
-					<div class="col-xs-3 form-group">
+					<div class="col-xs-3 form-group" valdr-form-group>
 	 					<label class="control-label" for=""> Time</label>
-						<input type="text" size="5" class="form-control" ng-model="newMeal.ate_at_time">
+						<input type="text" size="5" class="form-control" name="ate_at_time" ng-model="newMeal.ate_at_time">
 					</div>
 
 					<div class="col-xs-12 form-group">
-		 				<button type="button" class="btn btn-success btn-lg btn-block" ng-click="createMeal(newMeal)" data-dismiss="modal"> Save</button>
+		 				<button type="button" class="btn btn-success btn-lg btn-block" ng-click="createMeal(newMeal)" data-dismiss="modal" ng-disabled="!newMealForm.$valid"> Save</button>
 					</div>	
  				</div>
  				<div class="clearfix"></div>

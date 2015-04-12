@@ -59,6 +59,18 @@ angular.module('CtrlCalories')
                 loadMeals();
             };            
 
+            $scope.getClassForCalCounter = function(profile) {
+                if(profile !== undefined) {
+                    if(profile.expected_calories == null) {
+                        return 'green';
+                    }
+                    if(profile.consumed_calories > profile.expected_calories) {
+                        return 'red';
+                    }
+                    return 'green';
+                }
+            }
+
             function getMealById(id) {
                 return $scope.meals.filter(function( obj ) {
                     return +obj.id === +id;

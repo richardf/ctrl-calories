@@ -9,9 +9,24 @@ angular.module('CtrlCalories', ['ngRoute', 'ui.bootstrap', 'valdr'])
 
 	.config(function(valdrProvider) {
 		valdrProvider.addValidator('passwordConfValidator');
+		valdrProvider.addValidator('numberValidator');
+
 		valdrProvider.addConstraints({
-			'Meal' : {},
-			'Profile' : {},
+			'meal' : {
+				'description' : {
+					'required' : { 'message': 'This field is required.' }
+				},
+				'calories' : {
+					'numberValidator' : { 'message' : 'This field is numeric.'},
+					'required' : { 'message': 'This field is required.' }
+				},
+				'ate_at_date' : {
+					'required' : { 'message': 'This field is required.' }
+				},
+				'ate_at_time' : {
+					'required' : { 'message': 'This field is required.' }
+				}
+			},
 			'signin' : {
 				'login' : {
 					'email' : {'message' : 'Please inform a valid email.'}
