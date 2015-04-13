@@ -3,6 +3,10 @@
 	<div class="col-md-12">
 		<h1>Meals</h1>
 		<br>
+		<div class="row alert alert-danger" ng-show="error">
+			<strong>Oops...</strong> {{error}}. Please refresh the page.
+		</div>
+
 		<div class="row">
 			<div class="col-md-2 form-inline">
 				<button class="btn btn-success btn" data-toggle="modal" data-target="#newMeal" ng-click="prepareNewMeal()"><span class="glyphicon glyphicon-plus" data-title="Add Meal"></span> Add meal</button>
@@ -83,9 +87,16 @@
 			<div class="clearfix"></div>
 		</div>
 
-		<div id="consumedCal" class="pull-right" ng-class="getClassForCalCounter(profile)">
-			Calories consumed today: {{profile.consumed_calories}}
+		<div id="consumedCal" class="pull-right">
+			<span ng-class="getClassForCalCounter(profile)">Calories consumed today: {{profile.consumed_calories}}</span>
+		
+			<div class="progress" ng-show="profile.expected_calories">
+	            <div class="progress-bar" ng-class="getClassForBar()" role="progressbar" style="width: {{calcPercentualCalories()}}%">
+	            </div>
+	            <span class="progress-completed">{{calcPercentualCalories()}}%</span>
+	        </div>
 		</div>
+
 	</div>
 </div>
 

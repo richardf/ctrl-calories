@@ -1,6 +1,6 @@
 angular.module('CtrlCalories')
-    .controller('ProfileCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'Profile', 
-    	function ($rootScope, $scope, $location, Auth, Profile) {
+    .controller('ProfileCtrl', ['$scope', '$location', 'Auth', 'Profile', 
+    	function ($scope, $location, Auth, Profile) {
 
     		$scope.updateProfile = function(profile) {
                 if(!validatePassword(profile.password, profile.passwordConf)) {

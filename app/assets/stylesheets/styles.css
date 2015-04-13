@@ -31,3 +31,13 @@ body {
 .valdr-message.ng-dirty.ng-invalid.ng-touched {
 	display: inline;
 }
+
+.progress {
+    position: relative;
+}
+
+.progress > .progress-completed {
+	position: absolute;
+	right: 0px;
+	font-weight: 400;
+}

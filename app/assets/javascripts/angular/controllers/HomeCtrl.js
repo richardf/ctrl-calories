@@ -1,6 +1,6 @@
 angular.module('CtrlCalories')
-    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'Profile', 'Meal',
-        function ($rootScope, $scope, $location, Auth, Profile, Meal) {
+    .controller('HomeCtrl', ['$scope', '$location', 'Auth', 'Profile', 'Meal',
+        function ($scope, $location, Auth, Profile, Meal) {
 
         	$scope.clearFilter = function() {
                 $scope.filter = null;
@@ -28,7 +28,6 @@ angular.module('CtrlCalories')
                     $scope.newMealForm.$setPristine();
                     $scope.newMeal = null;
                 }).error(function(err) {
-                    console.log(err);
                     $scope.error = err.error;
                 });
             };            
@@ -44,9 +43,8 @@ angular.module('CtrlCalories')
                     loadProfile();
                     loadMeals();
                     $scope.mealToUpdate = null;
-                }).error(function(err) {
-                    console.log(err);
-                    $scope.error = err.error;
+                }).error(function(err, status) {
+                    $scope.error = err.error;                    
                 });
             };
 
@@ -77,6 +75,24 @@ angular.module('CtrlCalories')
                     return 'green';
                 }
             }
+
+            $scope.calcPercentualCalories = function() {
+                if($scope.profile == null) {
+                    return 0;
+                }
+                var exp = $scope.profile.expected_calories;
+                var consumed = $scope.profile.consumed_calories;
+                var ratio = (consumed / exp) * 100;
+                return ratio.toFixed(1);
+            };
+
+            $scope.getClassForBar = function() {
+                if($scope.calcPercentualCalories() > 100.0) {
+                    return "progress-bar-danger";
+                } else {
+                    return "progress-bar-success";
+                }
+            };
 
             function getMealById(id) {
                 return $scope.meals.filter(function( obj ) {
