@@ -83,9 +83,16 @@
 			<div class="clearfix"></div>
 		</div>
 
-		<div id="consumedCal" class="pull-right" ng-class="getClassForCalCounter(profile)">
-			Calories consumed today: {{profile.consumed_calories}}
+		<div id="consumedCal" class="pull-right">
+			<span ng-class="getClassForCalCounter(profile)">Calories consumed today: {{profile.consumed_calories}}</span>
+		
+			<div class="progress" ng-show="profile.expected_calories">
+	            <div class="progress-bar" ng-class="getClassForBar()" role="progressbar" style="width: {{calcPercentualCalories()}}%">
+	            </div>
+	            <span class="progress-completed">{{calcPercentualCalories()}}%</span>
+	        </div>
 		</div>
+
 	</div>
 </div>
 

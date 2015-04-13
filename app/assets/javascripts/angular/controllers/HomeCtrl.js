@@ -78,6 +78,21 @@ angular.module('CtrlCalories')
                 }
             }
 
+            $scope.calcPercentualCalories = function() {
+                var exp = $scope.profile.expected_calories;
+                var consumed = $scope.profile.consumed_calories;
+                var ratio = (consumed / exp) * 100;
+                return ratio.toFixed(1);
+            };
+
+            $scope.getClassForBar = function() {
+                if($scope.calcPercentualCalories() > 100.0) {
+                    return "progress-bar-danger";
+                } else {
+                    return "progress-bar-success";
+                }
+            };
+
             function getMealById(id) {
                 return $scope.meals.filter(function( obj ) {
                     return +obj.id === +id;
