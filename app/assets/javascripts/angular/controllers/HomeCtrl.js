@@ -1,6 +1,6 @@
 angular.module('CtrlCalories')
-    .controller('HomeCtrl', ['$rootScope', '$scope', '$location', 'Auth', 'Profile', 'Meal',
-        function ($rootScope, $scope, $location, Auth, Profile, Meal) {
+    .controller('HomeCtrl', ['$scope', '$location', 'Auth', 'Profile', 'Meal',
+        function ($scope, $location, Auth, Profile, Meal) {
 
         	$scope.clearFilter = function() {
                 $scope.filter = null;

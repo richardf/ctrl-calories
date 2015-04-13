@@ -1,6 +1,6 @@
 angular.module('CtrlCalories')
-    .controller('AuthCtrl', ['$rootScope', '$scope', '$location', 'Auth',
-        function ($rootScope, $scope, $location, Auth) {
+    .controller('AuthCtrl', ['$scope', '$location', 'Auth',
+        function ($scope, $location, Auth) {
 
             function successSignup() {
                 $scope.signin($scope.login, $scope.password);
@@ -18,7 +18,7 @@ angular.module('CtrlCalories')
                 };
 
                 Auth.signin(formData, successAuth, function () {
-                    $rootScope.error = 'Wrong email or password';
+                    $scope.error = 'Wrong email or password';
                 })
             };
 
@@ -32,7 +32,7 @@ angular.module('CtrlCalories')
                 };
 
                 Auth.signup(formData, successSignup, function (res) {
-                    $rootScope.error = res.error || 'Failed to sign up.';
+                    $scope.error = res.error || 'Failed to sign up.';
                 })
             };
         }]);
