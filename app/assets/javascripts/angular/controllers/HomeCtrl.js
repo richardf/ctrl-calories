@@ -79,6 +79,9 @@ angular.module('CtrlCalories')
             }
 
             $scope.calcPercentualCalories = function() {
+                if($scope.profile == null) {
+                    return 0;
+                }
                 var exp = $scope.profile.expected_calories;
                 var consumed = $scope.profile.consumed_calories;
                 var ratio = (consumed / exp) * 100;
