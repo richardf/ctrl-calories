@@ -28,7 +28,6 @@ angular.module('CtrlCalories')
                     $scope.newMealForm.$setPristine();
                     $scope.newMeal = null;
                 }).error(function(err) {
-                    console.log(err);
                     $scope.error = err.error;
                 });
             };            
@@ -44,9 +43,8 @@ angular.module('CtrlCalories')
                     loadProfile();
                     loadMeals();
                     $scope.mealToUpdate = null;
-                }).error(function(err) {
-                    console.log(err);
-                    $scope.error = err.error;
+                }).error(function(err, status) {
+                    $scope.error = err.error;                    
                 });
             };
 

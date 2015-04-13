@@ -3,6 +3,10 @@
 	<div class="col-md-12">
 		<h1>Meals</h1>
 		<br>
+		<div class="row alert alert-danger" ng-show="error">
+			<strong>Oops...</strong> {{error}}. Please refresh the page.
+		</div>
+
 		<div class="row">
 			<div class="col-md-2 form-inline">
 				<button class="btn btn-success btn" data-toggle="modal" data-target="#newMeal" ng-click="prepareNewMeal()"><span class="glyphicon glyphicon-plus" data-title="Add Meal"></span> Add meal</button>
