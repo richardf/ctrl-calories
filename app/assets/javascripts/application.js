@@ -16,4 +16,6 @@
 //= require angular-route
 //= require valdr
 //= require valdr-message
+//= require bootstrap.min
+//= require ui-bootstrap-tpls
 //= require_tree .
